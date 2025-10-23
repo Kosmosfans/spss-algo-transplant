@@ -11,10 +11,14 @@ module kmeans_core
 
 contains
 
-  !> @brief distribute data points to the nearest cluster center.
-  !> @param[in] data input dataset (n_cases, n_vars)
-  !> @param[in] centers current cluster centers (n_clusters, n_vars)
-  !> @param[out] assignments cluster assignments for each data point (n_cases)
+  !--------------------------------------------------------------------
+  ! distribute data points to the nearest cluster center.
+  !
+  ! Arguments:
+  !   data        - input dataset (n_cases, n_vars)
+  !   centers     - current cluster centers (n_clusters, n_vars)
+  !   assignments - output cluster assignments for each data point (n_cases)
+  !--------------------------------------------------------------------
   subroutine assign_to_clusters(data, centers, assignments)
     real, intent(in) :: data(:,:), centers(:,:)
     integer, intent(out) :: assignments(:)
@@ -41,12 +45,16 @@ contains
     end do
   end subroutine assign_to_clusters
 
-  !> @brief adjust cluster centers based on current assignments.
-  !> @param[in] data dataset (n_cases, n_vars).
-  !> @param[in] assignments index of assigned cluster for each data point (n_cases).
-  !> @param[in] n_clusters number of clusters.
-  !> @param[in,out] centers cluster centers to be updated (n_clusters, n_vars).
-  !> @param[out] cluster_counts count of data points in each cluster (n_clusters).
+  !--------------------------------------------------------------------
+  ! adjust cluster centers based on current assignments.
+  !
+  ! Arguments:
+  !   data           - input dataset (n_cases, n_vars)
+  !   assignments    - cluster assignments for each data point (n_cases)
+  !   n_clusters     - number of clusters
+  !   centers        - cluster centers to be updated (n_clusters, n_vars)
+  !   cluster_counts - count of data points in each cluster (n_clusters)
+  !--------------------------------------------------------------------
   subroutine update_centers(data, assignments, n_clusters, centers, cluster_counts)
     real, intent(in) :: data(:,:)
     integer, intent(in) :: assignments(:), n_clusters
@@ -79,13 +87,17 @@ contains
     end do
   end subroutine update_centers
 
-  !> @brief perform K-Means clustering on the input data.
-  !> @param[in] data data set to cluster (n_cases, n_vars).
-  !> @param[in] n_clusters number of clusters.
-  !> @param[in] max_iter maximum number of iterations.
-  !> @param[out] final_centers final cluster centers (n_clusters, n_vars).
-  !> @param[out] final_assignments final cluster assignments for each data point (n_cases).
-  !> @param[out] final_counts final counts of data points in each cluster (n_clusters).
+  !--------------------------------------------------------------------
+  ! perform K-Means clustering
+  !
+  ! Arguments:
+  !   data              - input dataset (n_cases, n_vars)
+  !   n_clusters        - number of clusters
+  !   max_iter          - maximum number of iterations
+  !   final_centers     - output final cluster centers (n_clusters, n_vars)
+  !   final_assignments - output final cluster assignments for each data point (n_cases)
+  !   final_counts      - output final counts of data points in each cluster (n_clusters)
+  !--------------------------------------------------------------------
   subroutine kmeans(data, n_clusters, max_iter, final_centers, final_assignments, final_counts)
     real, intent(in) :: data(:,:)
     integer, intent(in) :: n_clusters, max_iter
@@ -99,10 +111,10 @@ contains
 
     allocate(prev_centers(size(final_centers,1), size(final_centers,2)))
 
-    ! 1. choose initial centers
+    ! choose initial centers
     call select_initial_centers(data, n_clusters, final_centers)
 
-    ! 2. iterative refinement
+    ! iterative refinement
     do iter = 1, max_iter
       prev_centers = final_centers
 

@@ -9,10 +9,9 @@ module distance_utils
 
 contains
 
-  !> @brief calculate squared Euclidean distance between two vectors
-  !> @param[in] x first vector
-  !> @param[in] y second vector
-  !> @return squared Euclidean distance
+  !--------------------------------------------------------------------
+  ! calculate squared Euclidean distance between two vectors
+  !--------------------------------------------------------------------
   pure function euclidean_distance_sq(x, y) result(d2)
     real, intent(in) :: x(:), y(:)
     real :: d2

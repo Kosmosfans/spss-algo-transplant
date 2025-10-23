@@ -3,12 +3,21 @@
 !> @date 2025-10-22
 module initial_centers
   use distance_utils, only: euclidean_distance_sq
+  use maths, only: weighted_random_sample
   implicit none
   private
   public :: select_initial_centers
 
 contains
 
+  !--------------------------------------------------------------------
+  ! Select initial cluster centers using K-means++ algorithm
+  !
+  ! Arguments:
+  !   data        - input data array (n_cases x n_vars)
+  !   n_clusters  - number of clusters
+  !   centers     - output array to hold selected centers (n_clusters x n_vars)
+  !--------------------------------------------------------------------
   subroutine select_initial_centers(data, n_clusters, centers)
     implicit none
 
@@ -52,17 +61,9 @@ contains
       end do
 
       ! Choose the next center with probability proportional to D(x)^2
-      total_dist_sq = sum(min_dist_sq)
-      call random_number(r_val)
-      r = r_val * total_dist_sq
-      cumulative_prob = 0.0
-      do j = 1, n_cases
-        cumulative_prob = cumulative_prob + min_dist_sq(j)
-        if (cumulative_prob >= r) then
-          centers(i, :) = data(j, :)
-          exit
-        end if
-      end do
+      ! using the weighted_random_sample function.
+      center_idx = weighted_random_sample(min_dist_sq)
+      centers(i, :) = data(center_idx, :)
     end do
 
     deallocate(min_dist_sq)

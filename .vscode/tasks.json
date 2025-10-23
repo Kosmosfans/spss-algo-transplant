@@ -4,7 +4,7 @@
     {
       "label": "build",
       "type": "shell",
-      "command": "mkdir -p build && gfortran src/kmq/distance_utils.f90 src/kmq/initial_centers.f90 src/kmq/kmeans_core.f90 src/utils/read_file.f90 kmq_main.f90 -J build -o build/kmq_program",
+      "command": "mkdir -p build && gfortran src/utils/maths.f90 src/kmq/distance_utils.f90 src/kmq/initial_centers.f90 src/kmq/kmeans_core.f90 src/utils/read_file.f90  kmq_main.f90 -J build -o build/kmq_program",
       "group": { "kind": "build", "isDefault": true },
       "presentation": { "reveal": "always", "panel": "shared" },
       "problemMatcher": []

@@ -4,11 +4,14 @@
 module read_file_module
   implicit none
   contains
-    !> @brief Reads numeric data from a CSV file, determining dimensions dynamically.
-    !> @param file_path The path to the CSV file.
-    !> @param data The allocatable 2D array to store the data.
-    !> @param n_cases The number of rows (cases) found in the file.
-    !> @param n_vars The number of columns (variables) found in the file.
+    !--------------------------------------------------------------------
+    ! Reads numeric data from a CSV file.
+    !
+    ! Arguments:
+    !   file_path - path to the CSV file
+    ! Returns:
+    !   data      - allocatable 2D array containing the numeric data
+    !--------------------------------------------------------------------
     function read_numeric_csv(file_path) result(data)
       character(len=*), intent(in) :: file_path
       real, allocatable :: data(:,:)
