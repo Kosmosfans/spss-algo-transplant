@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "mkdir -p build && gfortran src/kmq/distance_utils.f90 src/kmq/initial_centers.f90 src/kmq/kmeans_core.f90 src/utils/read_file.f90 kmq_main.f90 -J build -o build/kmq_program",
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "run",
+      "type": "shell",
+      "command": "./build/kmq_program",
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "build and run",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "build",
+        "run"
+      ]
+    }
+  ]
+}
