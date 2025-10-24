@@ -28,7 +28,6 @@ contains
     integer :: n_cases, n_vars
     integer :: i, j, center_idx
     real, allocatable :: min_dist_sq(:)
-    real :: total_dist_sq, r, cumulative_prob
 
     real :: r_val
 

@@ -19,8 +19,6 @@ module read_file_module
 
       integer :: unit_number, io_status, i
       character(len=1024) :: line
-      real, allocatable :: temp_data(:)
-      integer :: num_values
 
       unit_number = 15
       open(unit=unit_number, file=file_path, status='old', action='read', iostat=io_status)

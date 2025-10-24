@@ -62,7 +62,7 @@ contains
     integer, intent(out) :: cluster_counts(:)
 
     integer :: n_vars, n_cases
-    integer :: i, j, cluster_idx
+    integer :: i, cluster_idx
 
     n_vars = size(data, 2)
     n_cases = size(data, 1)
